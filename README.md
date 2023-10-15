@@ -1,0 +1,2 @@
+# timi
+Stranka Timiho :)
