@@ -2,14 +2,79 @@
   <head>
     <title>Stranka Timiho :)</title>
     <link rel="icon" type="image/x-icon" href="icons8-money-32.png" />
+      <style>
+          /* Style for the overlay */
+          #overlay {
+              position: fixed;
+              width: 100%;
+              height: 100%;
+              top: 0;
+              left: 0;
+              background: rgb(105, 192, 32);
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              z-index: 1000;
+          }
+
+          /* Style for the password prompt box */
+          #password-box {
+              background: white;
+              padding: 20px;
+              border-radius: 5px;
+              text-align: center;
+          }
+
+          #password-box input[type="password"] {
+              padding: 10px;
+              margin: 10px 0;
+              width: 80%;
+          }
+
+          #password-box button {
+              padding: 10px 20px;
+              background-color: #4CAF50;
+              color: white;
+              border: none;
+              border-radius: 5px;
+              cursor: pointer;
+          }
+
+          #password-box button:hover {
+              background-color: #45a049;
+          }
+      </style>
     <script>
       setInterval(() => {
         const end = new Date(2024, 5, 30);
         let diff = end - new Date();
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff - days * 1000 * 60 * 60 * 24) / (60 *60 * 1000));
-        document.querySelector("#schoolEnd").textContent = `Do konce roku zustáva ${days} dnu a ${hours} hodin`;
-      }, 1000)
+        document.querySelector("#schoolEnd").textContent = `Do konce školního roku zustáva ${days} dnu a ${hours} hodin`;
+      }, 1000);
+      var originalTitle = document.title;
+
+      // Add an event listener for when the window loses focus
+      window.addEventListener('blur', function() {
+        document.title = "vraťte se do webu";
+      });
+
+      // Add an event listener for when the window gains focus
+      window.addEventListener('focus', function() {
+        document.title = originalTitle;
+      });
+
+      function checkPassword() {
+        var correctPassword = "Timofij101"; // Set your password here
+        var enteredPassword = document.getElementById('password').value;
+
+        if (enteredPassword === correctPassword) {
+          document.getElementById('overlay').style.display = 'none'; // Hide the overlay
+        } else {
+          alert("špatné heslo!");
+        }
+      }
+
       // setTimeout(() => {
       //   document.querySelector("#head").setAttribute("style", "display: none");
       //   document.querySelector("#table").setAttribute("style", "display: none");
@@ -19,6 +84,14 @@
   </head>
   <body>
     <h1 id="head">Tato stranka je vytvarkou Timiho</h1>
+
+    <div id="overlay">
+        <div id="password-box">
+            <h2>Zadejte Heslo Webu</h2>
+            <input type="password" id="password" placeholder="Heslo">
+            <button onclick="checkPassword()">Hotovo</button>
+        </div>
+    </div>
 
     <table id="table">
       <tbody>
